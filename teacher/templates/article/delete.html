@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block title%} Delete {%endblock%}
+
+{%block content%}
+
+<form method="post">
+{%csrf_token%}
+    <p>
+        Rostdanham siz <b>{{object.title}}</b>ni ochirmoqchimisiz?
+    </p>
+    <button class="btn btn-danger" type="submit">Xa</button>
+    <a href="{%url 'articles:list'%}">
+        <button class="btn btn-secondary" type="button">Yoq</button>
+    </a>
+
+</form>
+
+{%endblock%}
+

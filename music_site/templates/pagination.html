@@ -1,0 +1,11 @@
+<ul class="pagination">
+{% if object_list.has_previous %}
+    <li><a class="fa fa-angle-double-left" href="?page={{object_list.previous_page_number}}"></a></li>
+{% endif %}
+{% for page in object_list.paginator.page_range %}
+    <li class="{% if page == object_list.number %}active{% endif %}"><a href="?page={{page}}">{{page}}</a></li>
+{%endfor%}
+{% if object_list.has_next %}
+    <li><a class="fa fa-angle-double-right" href="?page={{object_list.next_page_number}}"></a></li>
+{% endif %}
+</ul>

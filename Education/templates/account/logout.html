@@ -1,0 +1,7 @@
+<a href="{% url 'main:index' %}">Back to home</a>
+<h1>Are you sure?</h1>
+<form method="post">
+    {%csrf_token%}
+    <button type="submit">Yes</button>
+    <button><a href="{% url 'main:index' %}">No</a></button>
+</form>

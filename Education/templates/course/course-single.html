@@ -1,0 +1,248 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<!-- Mirrored from preview.colorlib.com/theme/university/course-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Feb 2023 14:27:52 GMT -->
+<head>
+    <title>Free Education Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script nonce="89fafa48-38f3-4108-ad5e-e85a9eb68c9a">
+        (function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="https://preview.colorlib.com/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);
+
+
+    </script>
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<section class="site-hero site-sm-hero overlay" data-stellar-background-ratio="0.5"
+         style="background-image: url({{object.cover.url}});">
+    <div class="container">
+        <div class="row align-items-center justify-content-center site-hero-sm-inner">
+            <div class="col-md-7 text-center">
+                <div class="mb-5 element-animate">
+                    <h1 class="mb-2">{{object.title}}</h1>
+                    <p class="bcrumb"><a href="{% url 'main:index' %}">Home</a> <span
+                            class="sep ion-android-arrow-dropright px-2"></span> <a href="{% url 'course:course' %}">Course</a> <span
+                            class="sep ion-android-arrow-dropright px-2"></span> <span class="current">{{object.title}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="site-section bg-light element-animate">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-8 order-md-2 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{{object.detail_cover.url}}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <section class="episodes">
+                    <div class="container">
+                        <div class="row mb-5">
+                            <div class="col-md-12 pt-5">
+                                <h2>{{object.title}}</h2>
+                                <p>{{object.body|safe}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <h2>Lesson</h2>
+                            </div>
+                        </div>
+                        {% for lesson in object.lesson_set.all %}
+                            <div class="row align-items-center p-4 episode">
+                            <div class="col-md-10">
+                                <p class="meta">Episode {{forloop.counter}}</p>
+                                <h2><a href="{% url 'course:lesson_detail' object.id lesson.id %}">{{lesson.title}}</a></h2>
+                                <p>{{lesson.body|safe}}</p>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a href="#" class="play"><span class="ion-ios-play"></span></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-6 col-lg-4 order-md-1">
+                <div class="block-29 mb-5">
+                    <h2 class="heading">Course Details</h2>
+                    <ul>
+                        <li><span class="text-1">Difficulty: </span> <span class="text-2">{{object.get_difficulty_display}}</span></li>
+                        <li><span class="text-1">Lessons: </span> <span class="text-2">{{object.lesson_set.count}}</span></li>
+                        <li><span class="text-1">Language: </span> <span class="text-2">English</span></li>
+                        <li><span class="text-1">Price: </span> <span class="text-2">{% if course.price %}{{course.price}}{% else %}Free{% endif %}</span></li>
+                    </ul>
+                </div>
+                <div class="block-28 text-center mb-5">
+                    <figure>
+                        <img src="" alt="" class="img-fluid">
+                    </figure>
+                    <h2 class="heading">{{object.author}}</h2>
+                    <h3 class="subheading">{{object.author.bio}}</h3>
+                    <p>
+                        <a href="#" class="fa fa-twitter p-2"></a>
+                        <a href="#" class="fa fa-facebook p-2"></a>
+                        <a href="#" class="fa fa-linkedin p-2"></a>
+                    </p>
+                    <p>Hi I'm Mark Stewart, consectetur adipisicing elit. Quibusdam nulla beatae modi itaque nemo magni
+                        molestiae explicabo sint dolorum cum! Nam iste eligendi autem voluptates illo veritatis veniam
+                        laudantium enim!</p>
+                </div>
+                <div class="block-25 mb-5">
+                    <div class="heading">Recent Courses</div>
+                    <ul>
+                        {% for course in courses %}
+                            <li>
+                            <a href="#" class="d-flex">
+                                <figure class="image mr-3">
+                                    <img src="{{course.cover.url}}" alt="" class="img-fluid">
+                                </figure>
+                                <div class="text">
+                                    <h3 class="heading">{{course.title}}</h3>
+                                    <span class="meta">
+                                        {% if course.price %}
+                                            {{course.price}}
+                                        {% else %}
+                                            Free
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="block-24 mb-5">
+                    <h3 class="heading">Categories</h3>
+                    <ul>
+                        {% for cat in categories %}
+                            <li><a href="{% url 'course:course' %}?cat={{cat.title}}">{{cat.title}} <span>{{cat.post.count}}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="block-26">
+                    <h3 class="heading">Tags</h3>
+                    <ul>
+                        {% for tag in tags %}
+                            <li><a href="{% url 'course:course' %}?tag={{tag.title}}">{{tag.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 element-animate">
+            <div class="col-md-7 text-left section-heading">
+                <h2 class="text-primary heading">You May Also Like</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit qui neque sint eveniet tempore
+                    sapiente.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid block-11 element-animate">
+        <div class="nonloop-block-11 owl-carousel">
+            {% for random in random_courses %}
+                <div class="item">
+                <div class="block-19">
+                    <figure>
+                        <img src="{{random.cover.url}}" alt="Image" class="img-fluid">
+                    </figure>
+                    <div class="text">
+                        <h2 class="heading"><a href="{% url 'course:course-single' random.id %}">{{random.title}}</a></h2>
+                        <p class="mb-4">{{random.body|safe|slice:100}}</p>
+                        <div class="meta d-flex align-items-center">
+                            <div class="number">
+                                <span>2,219/6,000</span>
+                            </div>
+                            <div class="price text-right">
+                                <del class="mr-3">{{random.price}}</del>
+                                <span>Free</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+<div class="py-5 block-22">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0 pr-md-5">
+                <h2 class="heading">Create cool websites</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi accusantium optio und.</p>
+            </div>
+            <div class="col-md-6">
+                <form action="#" class="subscribe">
+                    <div class="form-group">
+                        <input type="email" class="form-control email" placeholder="Enter email">
+                        <input type="submit" class="btn btn-primary submit" value="Subscribe">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+<div id="loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#f4b214"/>
+    </svg>
+</div>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
+        integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
+        data-cf-beacon='{"rayId":"79e0a4bbbd88fe40","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.2.0","si":100}'
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

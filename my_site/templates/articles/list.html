@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row align-items-start mt-5">
+    <div class="col">
+      <a href="{% url 'articles:create'%}"><button class="btn btn-outline-primary">Create article</button></a> <br>
+      {% for object in object_list %}
+        <a class="mt-5" href="{% url 'articles:detail' object.id %}">{{object.title}}</a><br>
+      {% endfor %}
+    </div>
+    <div class="col">
+      <a href="?tag=" class="btn btn-outline-dark">All tags</a>
+      {% for tag in tags %}
+        <a href="?tag={{tag.title}}" class="btn btn-outline-dark">{{tag.title}}</a> <br>
+      {%endfor%}
+    </div>
+    <div class="col">
+      <a class="btn btn-outline-dark" href="?cat=">All categories</a>
+      {% for cat in category %}
+        <a href="?cat={{cat.title}}" class="btn btn-outline-dark">{{cat.title}}</a> <br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<h1>{{object.title}}</h1>
+{%if object.image%}
+    <img src="{{object.image.url}}" alt="">
+{%endif%}
+<p>{{object.content}}</p>
+<div>
+    <code>{{created_date}}</code>
+</div>
+
+<div>
+    {% for tag in object.tags.all %}
+        <button class="btn btn-outline-dark" type="button">{{tag.title}}</button>
+    {% endfor %}
+</div>
+
+
+<a href="{% url 'articles:edit' object.id %}">Edit</a>
+<a href="{% url 'articles:delete' object.id %}">Delete</a>
+
+{%endblock%}

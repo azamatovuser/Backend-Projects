@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Free Bootstrap Admin Template : Two Page</title>
+    <link href="{% static 'css/bootstrap1.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="adjust-nav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'main:index' %}"><i
+                        class="fa fa-square-o "></i>&nbsp;University</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li class="text-center user-image-back">
+                    <img src="{{request.user.profile.image.url}}" class="img-responsive"/>
+                </li>
+                <li>
+                    <a href="{% url 'account:dashboard' %}"><i class="fa fa-desktop"></i>Dashboard</a>
+                    <a href="{% url 'account:my_course' %}"><i class="fa fa-edit"></i>My courses</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Admin Dashboard</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+            <form method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="row">
+
+                    <div class="container">
+
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input style="width:250px" type="text" name="first_name"
+                               value="{{request.user.profile.user.first_name}}" id="first_name" class="form-control"
+                               aria-describedby="passwordHelpBlock">
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="container">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input style="width:250px" type="text" name="last_name"
+                               value="{{request.user.profile.user.last_name}}" id="last_name" class="form-control"
+                               aria-describedby="passwordHelpBlock">
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="container">
+                        <label for="image" class="form-label">Image</label>
+                        <input style="width:250px" type="file" name="image" id="image" aria-describedby="passwordHelpBlock">{{request.user.profile.image}}
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="container">
+                        <label for="bio" class="form-label">Bio</label>
+                        <input style="width:250px" type="text" name="bio" value="{{request.user.profile.bio}}" id="bio"
+                               class="form-control"
+                               aria-describedby="passwordHelpBlock">
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+                <div>
+                    <p></p>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="">
+                        <button class="btn btn-primary">Cancel</button>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'js/bootstrap.min1.js' %}"></script>
+<script src="{% static 'js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

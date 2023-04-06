@@ -1,0 +1,14 @@
+{% block content %}
+
+<div>
+    <form method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <div>
+            If you don't have an account then go to <a href="{% url 'account:register' %}">register</a>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+{% endblock %}

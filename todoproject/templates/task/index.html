@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="d-flex justify-content-center">
+    <div class="col-6">
+        <form method="post">
+            {%csrf_token%}
+          <div class="input-group mb-3 mt-5">
+          <input type="text" class="form-control" name="title" placeholder="Task..." aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-primary" type="submit" id="button-addon2">Add task</button>
+        </form>
+    </div>
+    <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic mixed styles example">
+      <a href="?status=0" class="btn btn-blue">Todo</a>
+      <a href="?status=1" class="btn btn-primary">In process</a>
+      <a href="?status=2" class="btn btn-success">Done</a>
+      <a href="?status=3" class="btn btn-danger">Cancelled</a>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="?priority=0" class="form-control">Low</a></li>
+          <li><a href="?priority=1" class="form-control">Medium</a></li>
+          <li><a href="?priority=2" class="form-control">Hard</a></li>
+        </ul>
+      </div>
+    </div>
+    {% for obj in object_list%}
+        <ul class="list-group mt-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {% if obj.priority == 0%}
+                    <a href="{% url 'task:edit' obj.id %}">{{obj.title}} <i class="bi bi-chevron-double-down"></i></a>
+                {% endif %}
+                {% if obj.priority == 1%}
+                    <a href="{% url 'task:edit' obj.id %}">{{obj.title}} <i class="bi bi-list"></i> </a>
+                {% endif %}
+                {% if obj.priority == 2%}
+                    <a href="{% url 'task:edit' obj.id %}">{{obj.title}} <i class="bi bi-chevron-double-up"></i></a>
+                {% endif %}
+                <div>
+                    <a href="{% url 'task:edit' obj.id %}" class="m-2"><button class="btn btn-outline-dark btn-sm">Edit</button></a>
+                    <a href="{% url 'task:delete' obj.id %}"><button class="btn btn-outline-dark btn-sm">Delete</button></a>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+    </div>
+</div>
+{%endblock%}
